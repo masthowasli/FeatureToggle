@@ -1,0 +1,20 @@
+{
+    "name": "masthowasli/feature-toggle",
+    "type": "library",
+    "description": "PHP Component - Feature toggling support in code and templates",
+    "keywords": ["component", "feature-toggle"],
+    "homepage": "https://masthowasli.github.com",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Thomas Sliwa",
+            "email": "ts@unfinished.dyndns.org"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "Masthowasli\\Component\\FeatureToggle": "" }
+    },
+    "target-dir": "Masthowasli/Component/FeatureToggle"
+}
+
