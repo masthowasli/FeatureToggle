@@ -16,7 +16,7 @@
  * @link       https://github.com/masthowasli/FeatureToggle
  */
 
-namespace Masthowasli\Component\FeatureToggle;
+namespace Masthowasli\Component\FeatureToggle\Feature;
 
 /**
  * Feature class
@@ -28,11 +28,8 @@ namespace Masthowasli\Component\FeatureToggle;
  * @license    http://opensource.org/licenses/MIT MIT
  * @link       https://github.com/masthowasli/FeatureToggle
  */
-class Feature
+class Base implements FeatureInterface
 {
-    const FEATURE_DISABLED = 0;
-    const FEATURE_ENABLED  = 1;
-
     /**
      * The feature name
      *

@@ -18,7 +18,7 @@
 
 namespace Masthowasli\Component\FeatureToggle\Requirement;
 
-use \Masthowasli\Component\FeatureToggle\Feature;
+use \Masthowasli\Component\FeatureToggle\Feature\FeatureInterface;
 
 /**
  * Requirement class to express the inclusion and or exclusion of a Feature
@@ -60,7 +60,7 @@ class Requirement
      * @param Feature $feature       The feature to require
      * @param integer $requiredState The required state of the feature
      */
-    public function __construct(Feature $feature, $requiredState = self::FEATURE_ENABLED)
+    public function __construct(FeatureInterface $feature, $requiredState = self::FEATURE_ENABLED)
     {
         $this->feature = $feature;
 

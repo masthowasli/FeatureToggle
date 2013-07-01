@@ -81,7 +81,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testOffsetSet()
     {
-        $requirement = new Requirement(new Feature('bar'));
+        $requirement = new Requirement(new Feature\Toggled('bar'));
         $this->object->offsetSet(0, $requirement);
 
         $this->assertEquals(1, $this->object->count());
@@ -104,7 +104,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testAppend()
     {
-        $requirement = new Requirement(new Feature('bar'));
+        $requirement = new Requirement(new Feature\Toggled('bar'));
         $this->object->append($requirement);
 
         $this->assertEquals(1, $this->object->count());

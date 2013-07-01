@@ -43,7 +43,7 @@ class RequirementTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->feature = new Feature('foo');
+        $this->feature = new Feature\Toggled('foo');
         $this->object = new Requirement($this->feature);
     }
 
@@ -62,7 +62,7 @@ class RequirementTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultConstructor()
     {
-        $this->assertAttributeInstanceOf('\Masthowasli\Component\FeatureToggle\Feature', 'feature', $this->object);
+        $this->assertAttributeInstanceOf('\Masthowasli\Component\FeatureToggle\Feature\FeatureInterface', 'feature', $this->object);
         $this->assertEquals(Requirement::FEATURE_ENABLED, $this->object->getRequiredState());
     }
 
