@@ -18,7 +18,8 @@
 
 namespace Masthowasli\Component\FeatureToggle\Requirement;
 
-use \Masthowasli\Component\FeatureToggle\Feature\FeatureInterface;
+use Masthowasli\Component\FeatureToggle\Feature\FeatureInterface;
+use Masthowasli\Component\FeatureToggle\Exception\Requirement as RequirementException;
 
 /**
  * Requirement class to express the inclusion and or exclusion of a Feature
@@ -60,8 +61,10 @@ class Requirement
      * @param Feature $feature       The feature to require
      * @param integer $requiredState The required state of the feature
      */
-    public function __construct(FeatureInterface $feature, $requiredState = self::FEATURE_ENABLED)
-    {
+    public function __construct(
+            FeatureInterface $feature,
+            $requiredState = self::FEATURE_ENABLED
+    ) {
         $this->feature = $feature;
 
         $this->setRequiredState($requiredState);
@@ -84,7 +87,7 @@ class Requirement
         if (!is_integer($state) && in_array($state, $this->allowedStates)) {
             throw new RequirementException(
                 sprintf(
-                    'Unknown state "%s" expected one of "%s"',
+                    'Unknown state "%s", expected one of "%s"',
                     $state,
                     implode('" or "', array_keys($this->allowedStates))
                 )

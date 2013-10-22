@@ -32,7 +32,7 @@ class ToggledTest extends \PHPUnit_Framework_TestCase
     protected $defaultName = 'test-toggle-feature';
 
     /**
-     * @var Feature
+     * @var Toggled
      */
     protected $object;
 

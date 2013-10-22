@@ -18,6 +18,8 @@
 
 namespace Masthowasli\Component\FeatureToggle\Feature;
 
+use \Masthowasli\Component\FeatureToggle\Feature\Base as Feature;
+
 /**
  * Time based feature class
  *
@@ -28,61 +30,21 @@ namespace Masthowasli\Component\FeatureToggle\Feature;
  * @license    http://opensource.org/licenses/MIT MIT
  * @link       https://github.com/masthowasli/FeatureToggle
  */
-class Timed implements FeatureInterface
+class Timed extends Feature
 {
-    /**
-     * The feature name
-     *
-     * @var string The feature name
-     */
-    private $name = '';
+    private $activeFrom = null;
 
-    private $state = self::FEATURE_DISABLED;
+    private $activeTo = null;
 
-    /**
-     * The feature's requirements
-     *
-     * @var \Masthowasli\Component\FeatureToggle\Requirement\Collection
-     */
-    private $requirements = null;
-
-    public function __construct($name, $state = self::FEATURE_DISABLED)
+    public function __construct($name, \DateTime $activeFrom, \DateTime $activeTo)
     {
-        $this->name = $name;
-        $this->state = $state;
-        $this->requirements = new \Masthowasli\Component\FeatureToggle\Requirement\Collection(array());
-    }
+        parent::__construct($name);
+        $this->activeFrom = $activeFrom;
+        $this->activeTo = $activeTo;
 
-    public function setState($state)
-    {
-        if (!is_integer($state)) {
-            throw new \InvalidArgumentException(
-                "The feature state has to be an integer constant value."
-            );
+        $now = new \DateTime();
+        if ($this->activeFrom <= $now && $this->activeTo >= $now) {
+            $this->state = self::FEATURE_ENABLED;
         }
-
-        $this->state = $state;
-
-        return $this;
-    }
-
-    /**
-     * Feature name getter
-     *
-     * @return string The feature's name
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Feature state getter
-     *
-     * @return integer The feature's state
-     */
-    public function getState()
-    {
-        return $this->state;
     }
 }

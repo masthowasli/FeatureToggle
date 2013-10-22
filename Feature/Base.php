@@ -18,6 +18,9 @@
 
 namespace Masthowasli\Component\FeatureToggle\Feature;
 
+use Masthowasli\Component\FeatureToggle\Feature\FeatureInterface;
+use Masthowasli\Component\FeatureToggle\Requirement\Collection as Requirements;
+
 /**
  * Feature class
  *
@@ -28,42 +31,28 @@ namespace Masthowasli\Component\FeatureToggle\Feature;
  * @license    http://opensource.org/licenses/MIT MIT
  * @link       https://github.com/masthowasli/FeatureToggle
  */
-class Base implements FeatureInterface
+abstract class Base implements FeatureInterface
 {
     /**
      * The feature name
      *
      * @var string The feature name
      */
-    private $name = '';
+    protected $name = '';
 
-    private $state = self::FEATURE_DISABLED;
+    protected $state = self::FEATURE_DISABLED;
 
     /**
      * The feature's requirements
      *
-     * @var \Masthowasli\Component\FeatureToggle\Requirement\Collection
+     * @var Requirements
      */
-    private $requirements = null;
+    protected  $requirements = null;
 
-    public function __construct($name, $state = self::FEATURE_DISABLED)
+    public function __construct($name)
     {
         $this->name = $name;
-        $this->state = $state;
-        $this->requirements = new \Masthowasli\Component\FeatureToggle\Requirement\Collection(array());
-    }
-
-    public function setState($state)
-    {
-        if (!is_integer($state)) {
-            throw new \InvalidArgumentException(
-                "The feature state has to be an integer constant value."
-            );
-        }
-
-        $this->state = $state;
-
-        return $this;
+        $this->requirements = new Requirements(array());
     }
 
     /**

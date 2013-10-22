@@ -34,10 +34,14 @@ class Manager
 
     private $featureCollection = null;
 
+    /**
+     *
+     * @param Loader $loader
+     */
     public function __construct(Loader $loader)
     {
         $this->loader = $loader;
 
-        $this->featureCollection = new \Masthowasli\Component\FeatureToggle\Collection();
+        $this->featureCollection = $this->loader->load();
     }
 }

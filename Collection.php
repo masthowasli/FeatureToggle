@@ -19,7 +19,7 @@
 namespace Masthowasli\Component\FeatureToggle;
 
 /**
- * Defines a collection of feature classes
+ * Defines a collection of feature implentations
  *
  * @category   Masthowasli
  * @package    FeatureToggle
@@ -28,7 +28,40 @@ namespace Masthowasli\Component\FeatureToggle;
  * @license    http://opensource.org/licenses/MIT MIT
  * @link       https://github.com/masthowasli/FeatureToggle
  */
-class Collection
+class Collection implements \ArrayAccess, \IteratorAggregate
 {
+    private $store = array();
 
+    /**
+     * Builds an iterator for the instance
+     *
+     * @see IteratorAggregate::getIterator()
+     *
+     * @return \ArrayIterator The iterator of the instance
+     */
+    public function getIterator ()
+    {
+        return new ArrayIterator($this->store);
+    }
+
+    /**
+     * @param offset
+     */
+    public function offsetExists ($offset) {}
+
+    /**
+     * @param offset
+     */
+    public function offsetGet ($offset) {}
+
+    /**
+     * @param offset
+     * @param value
+     */
+    public function offsetSet ($offset, $value) {}
+
+    /**
+     * @param offset
+     */
+    public function offsetUnset ($offset) {}
 }

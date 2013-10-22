@@ -37,4 +37,17 @@ interface FeatureInterface
      */
     const FEATURE_ENABLED  = 1;
 
+    /**
+     * Access to the feature's name
+     *
+     * @return string The feature's name
+     */
+    public function getName();
+
+    /**
+     * Access to the feature's state
+     *
+     * @return integer The feature's state
+     */
+    public function getState();
 }
