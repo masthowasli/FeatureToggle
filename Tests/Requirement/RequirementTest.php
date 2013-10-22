@@ -16,7 +16,7 @@
  * @link       https://github.com/masthowasli/FeatureToggle
  */
 
-namespace Masthowasli\Component\FeatureToggle\Tests;
+namespace Masthowasli\Component\FeatureToggle\Tests\Requirement;
 
 use Masthowasli\Component\FeatureToggle\Feature;
 use Masthowasli\Component\FeatureToggle\Requirement\Requirement;
@@ -58,51 +58,71 @@ class RequirementTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests initial state of a new requirement
      *
-     * @covers \Masthowasli\Component\FeatureToggle\Requirement\Requirement::__construct()
+     * @covers Masthowasli\Component\FeatureToggle\Requirement\Requirement::__construct()
      */
     public function testDefaultConstructor()
     {
-        $this->assertAttributeInstanceOf('\Masthowasli\Component\FeatureToggle\Feature\FeatureInterface', 'feature', $this->object);
-        $this->assertEquals(Requirement::FEATURE_ENABLED, $this->object->getRequiredState());
+        $this->assertAttributeInstanceOf(
+                '\Masthowasli\Component\FeatureToggle\Feature\FeatureInterface',
+                'feature',
+                $this->object
+        );
+        $this->assertEquals(
+                Requirement::FEATURE_ENABLED,
+                $this->object->getRequiredState()
+        );
     }
 
     /**
      * Tests the get required state of a requirement method
      *
-     * @covers \Masthowasli\Component\FeatureToggle\Requirement\Requirement::__construct()
+     * @covers Masthowasli\Component\FeatureToggle\Requirement\Requirement::getRequiredState()
      */
     public function testGetRequiredState()
     {
-        $this->assertEquals(Requirement::FEATURE_ENABLED, $this->object->getRequiredState());
+        $this->assertEquals(
+                Requirement::FEATURE_ENABLED,
+                $this->object->getRequiredState()
+        );
     }
 
     /**
      * Tests the successful set required state of a requirement method invocation
      *
-     * @covers \Masthowasli\Component\FeatureToggle\Requirement\Requirement::__construct()
+     * @covers Masthowasli\Component\FeatureToggle\Requirement\Requirement::setRequiredState()
      *
-     * @depends \Masthowasli\Component\FeatureToggle\Tests\Requirement\RequirementTest::testGetRequiredState
+     * @depends Masthowasli\Component\FeatureToggle\Tests\Requirement\RequirementTest::testDefaultConstructor
      */
     public function testSetRequiredStateValid()
     {
         $this->object->setRequiredState(Requirement::FEATURE_DISABLED);
-        $this->assertEquals(Requirement::FEATURE_DISABLED, $this->object->getRequiredState());
+        $this->assertEquals(
+                Requirement::FEATURE_DISABLED,
+                $this->object->getRequiredState()
+        );
         $this->object->setRequiredState(Requirement::FEATURE_ENABLED);
-        $this->assertEquals(Requirement::FEATURE_ENABLED, $this->object->getRequiredState());
+        $this->assertEquals(
+                Requirement::FEATURE_ENABLED,
+                $this->object->getRequiredState()
+        );
     }
 
     /**
      * Tests the not successful set required state of a requirement method invocation
      *
-     * @covers \Masthowasli\Component\FeatureToggle\Requirement\Requirement::__construct()
+     * @covers Masthowasli\Component\FeatureToggle\Requirement\Requirement::setRequiredState()
      *
-     * @depends RequirementTest::testGetRequiredState
+     * @depends Masthowasli\Component\FeatureToggle\Tests\Requirement\RequirementTest::testDefaultConstructor
      */
     public function testSetRequiredStateNotValid()
     {
-        $this->setExpectedException('\Masthowasli\Component\FeatureToggle\Requirement\RequirementException');
+        $this->setExpectedException(
+                '\Masthowasli\Component\FeatureToggle\Exception\Requirement'
+        );
         $this->object->setRequiredState('somthing');
-        $this->setExpectedException('\Masthowasli\Component\FeatureToggle\Requirement\RequirementException');
+        $this->setExpectedException(
+                '\Masthowasli\Component\FeatureToggle\Exception\Requirement'
+        );
         $this->object->setRequiredState(68); // Jaromir Jagr, hockey god
     }
 }

@@ -16,8 +16,10 @@
  * @link       https://github.com/masthowasli/FeatureToggle
  */
 
-namespace Masthowasli\Component\FeatureToggle\Requirement;
+namespace Masthowasli\Component\FeatureToggle\Tests\Requirement;
 
+use Masthowasli\Component\FeatureToggle\Requirement\Collection;
+use Masthowasli\Component\FeatureToggle\Requirement\Requirement;
 use Masthowasli\Component\FeatureToggle\Feature;
 
 /**
@@ -53,7 +55,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructor()
     {
-        $this->setExpectedException('\Masthowasli\Component\FeatureToggle\Requirement\RequirementException');
+        $this->setExpectedException('\Masthowasli\Component\FeatureToggle\Exception\Requirement');
         $coll = new Collection(array(1, 2, 3));
 
         $coll = new Collection(
@@ -71,7 +73,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testOffsetSetFail()
     {
-        $this->setExpectedException('\Masthowasli\Component\FeatureToggle\Requirement\RequirementException');
+        $this->setExpectedException('\Masthowasli\Component\FeatureToggle\Exception\Requirement');
         $this->object->offsetSet(0, 'foo');
     }
 
@@ -94,7 +96,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testAppendFail()
     {
-        $this->setExpectedException('\Masthowasli\Component\FeatureToggle\Requirement\RequirementException');
+        $this->setExpectedException('\Masthowasli\Component\FeatureToggle\Exception\Requirement');
         $this->object->offsetSet(0, 'foo');
     }
 
