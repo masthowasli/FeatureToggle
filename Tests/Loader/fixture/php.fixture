@@ -1,0 +1,5 @@
+<?php
+$featureToggleDefinition = array(
+    new Masthowasli\Component\FeatureToggle\Feature\Toggled('feature.one'),
+    new Masthowasli\Component\FeatureToggle\Feature\Toggled('feature.two')
+);

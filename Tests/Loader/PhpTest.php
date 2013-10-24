@@ -42,8 +42,6 @@ class PhpTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->fixture = new \SplFileObject(__DIR__ . '/fixture/php.fixture');
-        $this->object = new Php($this->fixture);
     }
 
     /**
@@ -55,19 +53,50 @@ class PhpTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Prepares the Loader Object with the given feature
+     *
+     * @param boolean $empty Whether to load the empty fixture
+     *
+     * @return void
+     */
+    protected function prepareObject($empty = false)
+    {
+        if ($empty) {
+            $this->fixture = new \SplFileObject(
+                __DIR__ . '/fixture/php.empty.fixture'
+            );
+        } else {
+            $this->fixture = new \SplFileObject(
+                __DIR__ . '/fixture/php.fixture'
+            );
+        }
+        $this->object = new Php($this->fixture);
+    }
+
+    /**
      * Tests initial state of a new feature
      *
      * @covers \Masthowasli\Component\FeatureToggle\Loader\Php::__construct()
      */
     public function testConstructor()
     {
-        $this->assertInstanceOf('\Masthowasli\Component\FeatureToggle\Loader\Php', $this->object);
+        $this->prepareObject(true);
+        $this->assertInstanceOf(
+            '\Masthowasli\Component\FeatureToggle\Loader\Php',
+            $this->object
+        );
         $this->assertObjectHasAttribute('file', $this->object);
 
-        $prop = new \ReflectionProperty('\Masthowasli\Component\FeatureToggle\Loader\Php', 'file');
+        $prop = new \ReflectionProperty(
+            '\Masthowasli\Component\FeatureToggle\Loader\Php',
+            'file'
+        );
         $prop->setAccessible(true);
 
-        $this->assertInstanceOf('\SplFileObject', $prop->getValue($this->object));
+        $this->assertInstanceOf(
+            '\SplFileObject',
+            $prop->getValue($this->object)
+        );
     }
 
     /**
@@ -77,9 +106,13 @@ class PhpTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
+        $this->prepareObject(true);
         $this->assertInstanceOf(
             '\Masthowasli\Component\FeatureToggle\Feature\Collection',
             $this->object->load()
         );
+        $this->assertEquals(0, count($this->object->load()));
+        $this->prepareObject();
+        $this->assertEquals(2, count($this->object->load()));
     }
 }

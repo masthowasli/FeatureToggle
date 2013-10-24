@@ -18,6 +18,8 @@
 
 namespace \Masthowasli\Component\FeatureToggle;
 
+use Masthowasli\Component\FeatureToggle\Loader\LoaderInterface;
+
 /**
  * Class to manage all defined features
  *
@@ -35,10 +37,11 @@ class Manager
     private $featureCollection = null;
 
     /**
+     * Instantiates the manager with the given loader
      *
-     * @param Loader $loader
+     * @param Loader $loader The loader to get the features from
      */
-    public function __construct(Loader $loader)
+    public function __construct(LoaderInterface $loader)
     {
         $this->loader = $loader;
 

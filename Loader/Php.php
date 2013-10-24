@@ -30,9 +30,9 @@ class Php implements LoaderInterface
 {
     protected $file;
 
-    public function __construct($filepath)
+    public function __construct(\SplFileObject $file)
     {
-        $this->file = $filepath;
+        $this->file = $file;
     }
 
     /**
@@ -40,6 +40,12 @@ class Php implements LoaderInterface
      */
     public function load()
     {
-        return new Collection();
+        require_once $this->file->getPathname();
+
+        if (!isset($featureToggleDefinition)) {
+            $featureToggleDefinition = array();
+        }
+
+        return new Collection($featureToggleDefinition);
     }
 }

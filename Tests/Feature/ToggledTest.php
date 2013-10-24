@@ -1,6 +1,6 @@
 <?php
 /**
- * File of th Feature Tests
+ * File of the toggled feature tests
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,7 +18,8 @@
 
 namespace Masthowasli\Component\FeatureToggle\Tests\Feature;
 
-use \Masthowasli\Component\FeatureToggle\Feature\Toggled;
+use Masthowasli\Component\FeatureToggle\Feature\Toggled;
+use Masthowasli\Component\FeatureToggle\Feature\FeatureInterface;
 
 /**
  * Test class for Feature.
@@ -62,6 +63,46 @@ class ToggledTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals($this->defaultName, $this->object->getName());
         $this->assertAttributeNotEquals(null, 'requirements', $this->object);
-        $this->assertAttributeInstanceOf('\Masthowasli\Component\FeatureToggle\Requirement\Collection', 'requirements', $this->object);
+        $this->assertAttributeInstanceOf(
+            '\Masthowasli\Component\FeatureToggle\Requirement\Collection',
+            'requirements',
+            $this->object
+        );
+        $stateProperty = new \ReflectionProperty(
+            'Masthowasli\Component\FeatureToggle\Feature\Toggled',
+            'state'
+        );
+        $stateProperty->setAccessible(true);
+
+        $this->assertEquals(
+            FeatureInterface::FEATURE_DISABLED,
+            $stateProperty->getValue($this->object)
+        );
+    }
+
+    public function testState()
+    {
+        $this->assertEquals(
+            FeatureInterface::FEATURE_DISABLED,
+            $this->object->getState()
+        );
+        $this->object->setState(FeatureInterface::FEATURE_ENABLED);
+        $this->assertEquals(
+            FeatureInterface::FEATURE_ENABLED,
+            $this->object->getState()
+        );
+
+    }
+
+    public function testInvalidSetState()
+    {
+        $this->setExpectedException('\InvalidArgumentException');
+
+        $this->object->setState('some invalid state');
+    }
+
+    public function testName()
+    {
+        $this->assertEquals($this->defaultName, $this->object->getName());
     }
 }
