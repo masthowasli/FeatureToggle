@@ -20,7 +20,7 @@ namespace Masthowasli\Component\FeatureToggle\Tests\Feature;
 
 use Masthowasli\Component\FeatureToggle\Feature\Timed;
 use Masthowasli\Component\FeatureToggle\Feature\FeatureInterface;
-use Masthowasli;
+use Masthowasli\Component\FeatureToggle\Feature\Timed\Period;
 
 /**
  * Test class for Feature.
@@ -34,7 +34,12 @@ class TimedTest extends \PHPUnit_Framework_TestCase
     protected $defaultName = 'test-timed-feature';
 
     /**
-     * @var Toggled
+     * @var Period
+     */
+    protected $activePeriod;
+
+    /**
+     * @var Timed
      */
     protected $object;
 
@@ -44,10 +49,14 @@ class TimedTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Timed(
-            $this->defaultName,
+        $this->activePeriod = new Period(
             new \DateTime('1990-01-01'),
             new \DateTime()
+        );
+
+        $this->object = new Timed(
+            $this->defaultName,
+            $this->activePeriod
         );
     }
 
@@ -62,7 +71,7 @@ class TimedTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests initial state of a new feature
      *
-     * @covers \Masthowasli\Component\FeatureToggle\Feature\Toggled::__construct()
+     * @covers \Masthowasli\Component\FeatureToggle\Feature\Timed::__construct()
      */
     public function testConstructor()
     {
@@ -74,7 +83,7 @@ class TimedTest extends \PHPUnit_Framework_TestCase
             $this->object
         );
         $stateProperty = new \ReflectionProperty(
-            'Masthowasli\Component\FeatureToggle\Feature\Toggled',
+            'Masthowasli\Component\FeatureToggle\Feature\Timed',
             'state'
         );
         $stateProperty->setAccessible(true);
@@ -82,18 +91,6 @@ class TimedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             FeatureInterface::FEATURE_ENABLED,
             $stateProperty->getValue($this->object)
-        );
-    }
-
-    public function testInvalidConstruction()
-    {
-        $this->setExpectedException(
-            'Masthowasli\Component\FeatureToggle\Exception\Feature'
-        );
-        $invalid = new Timed(
-            $this->defaultName,
-            new \DateTime(),
-            new \DateTime()
         );
     }
 

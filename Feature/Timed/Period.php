@@ -1,6 +1,6 @@
 <?php
 /**
- * File of the class for a time based feature
+ * File of the class for a time based feature period
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,13 +16,12 @@
  * @link       https://github.com/masthowasli/FeatureToggle
  */
 
-namespace Masthowasli\Component\FeatureToggle\Feature;
+namespace Masthowasli\Component\FeatureToggle\Feature\Timed;
 
-use Masthowasli\Component\FeatureToggle\Feature\Base as Feature;
-use Masthowasli\Component\FeatureToggle\Feature\Timed\Period;
+use Masthowasli\Component\FeatureToggle\Exception\Period as PeriodException;
 
 /**
- * Time based feature class
+ * Time based feature period class
  *
  * @category   Masthowasli
  * @package    FeatureToggle
@@ -31,18 +30,24 @@ use Masthowasli\Component\FeatureToggle\Feature\Timed\Period;
  * @license    http://opensource.org/licenses/MIT MIT
  * @link       https://github.com/masthowasli/FeatureToggle
  */
-class Timed extends Feature
+class Period
 {
-    private $period = null;
+    private $activeFrom = null;
 
-    public function __construct($name, Period $period)
+    private $activeTo = null;
+
+    public function __construct(\DateTime $activeFrom, \DateTime $activeTo)
     {
-        parent::__construct($name);
-        $this->period = $period;
+        if ($activeFrom >= $activeTo) {
+            throw new PeriodException();
+        }
 
-        $now = new \DateTime();
-        $this->state = $this->period->isWithin($now)
-            ? self::FEATURE_ENABLED
-            : self::FEATURE_DISABLED;
+        $this->activeFrom = $activeFrom;
+        $this->activeTo = $activeTo;
+    }
+
+    public function isWithin(\DateTime $needle)
+    {
+        return $this->activeFrom <= $needle && $needle <= $this->activeTo;
     }
 }
