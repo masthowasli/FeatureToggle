@@ -33,6 +33,23 @@ use Masthowasli\Component\FeatureToggle\Exception\Feature as FeatureException;
 class Collection extends \ArrayIterator
 {
     /**
+     * Enforces the construction with an array consisting of FeatureInterface
+     * implementations
+     *
+     * @param FeatureInterface[] $array The array to construct with
+     *
+     * @return void
+     */
+    public function __construct($array = array())
+    {
+        foreach ($array as $element) {
+            $this->testForFeatureInterfaceInstance($element);
+        }
+
+        parent::__construct($array);
+    }
+
+    /**
      * Enforces the insertion of Requirement instances
      *
      * @param string      $offset The offset to set
@@ -44,7 +61,7 @@ class Collection extends \ArrayIterator
      */
     public function offsetSet($offset, $newvalue)
     {
-        $this->testForFeatureInstance($newvalue);
+        $this->testForFeatureInterfaceInstance($newvalue);
 
         parent::offsetSet($offset, $newvalue);
     }
@@ -52,7 +69,7 @@ class Collection extends \ArrayIterator
     /**
      * Enforces the insertion of Requirement instances
      *
-     * @param Requirement $newval The value to set
+     * @param Requirement $value The value to append
      *
      * @see \ArrayIterator::append()
      *
@@ -60,12 +77,12 @@ class Collection extends \ArrayIterator
      */
     public function append($value)
     {
-        $this->testForFeatureInstance($value);
+        $this->testForFeatureInterfaceInstance($value);
 
         parent::append($value);
     }
 
-    private function testForFeatureInstance($value)
+    private function testForFeatureInterfaceInstance($value)
     {
         if (!$value instanceof FeatureInterface) {
             throw new FeatureException(

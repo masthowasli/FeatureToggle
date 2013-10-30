@@ -79,7 +79,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Masthowasli\Component\FeatureToggle\Requirement\Collection::offsetSet
-     * @covers Masthowasli\Component\FeatureToggle\Requirement\Collection::testForFeatureInstance
+     * @covers Masthowasli\Component\FeatureToggle\Requirement\Collection::testForRequirementInstance
      */
     public function testOffsetSet()
     {
@@ -92,7 +92,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Masthowasli\Component\FeatureToggle\Requirement\Collection::append
-     * @covers Masthowasli\Component\FeatureToggle\Requirement\Collection::testForFeatureInstance
+     * @covers Masthowasli\Component\FeatureToggle\Requirement\Collection::testForRequirementInstance
      */
     public function testAppendFail()
     {
@@ -102,7 +102,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Masthowasli\Component\FeatureToggle\Requirement\Collection::append
-     * @covers Masthowasli\Component\FeatureToggle\Requirement\Collection::testForFeatureInstance
+     * @covers Masthowasli\Component\FeatureToggle\Requirement\Collection::testForRequirementInstance
      */
     public function testAppend()
     {
