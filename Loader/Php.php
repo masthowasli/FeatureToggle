@@ -16,6 +16,8 @@
 namespace Masthowasli\Component\FeatureToggle\Loader;
 
 use Masthowasli\Component\FeatureToggle\Feature\Collection;
+use Masthowasli\Component\FeatureToggle\Exception\Loader as LoaderException;
+
 /**
  * Raw php implementation of the LoaderInterface
  *
@@ -43,9 +45,24 @@ class Php implements LoaderInterface
         require_once $this->file->getPathname();
 
         if (!isset($featureToggleDefinition)) {
-            $featureToggleDefinition = array();
+            return new Collection();
+        } else {
+            return $this->parse($featureToggleDefinition);
         }
+    }
 
-        return new Collection($featureToggleDefinition);
+    protected function parse(array $definitions)
+    {
+        $collection = new Collection();
+
+        foreach ($definitions as $name => $definition) {
+            if (!array_key_exists('class', $definition)) {
+                throw new LoaderException();
+            }
+
+            $class = $definition['class'];
+
+            $feature = new $class($name);
+        }
     }
 }

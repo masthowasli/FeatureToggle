@@ -20,7 +20,7 @@ namespace Masthowasli\Component\FeatureToggle\Tests\Requirement;
 
 use Masthowasli\Component\FeatureToggle\Requirement\Collection;
 use Masthowasli\Component\FeatureToggle\Requirement\Requirement;
-use Masthowasli\Component\FeatureToggle\Feature;
+use Masthowasli\Component\FeatureToggle\Feature\Toggled;
 
 /**
  * Test class for Collection.
@@ -53,15 +53,20 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Masthowasli\Component\FeatureToggle\Requirement\Collection::__construct
      */
-    public function testConstructor()
+    public function testConstructorInvalid()
     {
-        $this->setExpectedException('\Masthowasli\Component\FeatureToggle\Exception\Requirement');
+        $this->setExpectedException(
+            '\Masthowasli\Component\FeatureToggle\Exception\Requirement'
+        );
         $coll = new Collection(array(1, 2, 3));
+    }
 
+    public function testConstructorValid()
+    {
         $coll = new Collection(
             array(
-                new Feature('foo'),
-                new Feature('bar')
+                new Requirement(new Toggled('foo')),
+                new Requirement(new Toggled('bar'))
             )
         );
 
@@ -83,7 +88,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testOffsetSet()
     {
-        $requirement = new Requirement(new Feature\Toggled('bar'));
+        $requirement = new Requirement(new Toggled('bar'));
         $this->object->offsetSet(0, $requirement);
 
         $this->assertEquals(1, $this->object->count());
@@ -106,7 +111,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testAppend()
     {
-        $requirement = new Requirement(new Feature\Toggled('bar'));
+        $requirement = new Requirement(new Toggled('bar'));
         $this->object->append($requirement);
 
         $this->assertEquals(1, $this->object->count());

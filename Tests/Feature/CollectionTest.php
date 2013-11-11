@@ -50,6 +50,26 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     {
     }
 
+    public function testConstructorInvalid()
+    {
+        $this->setExpectedException(
+            '\Masthowasli\Component\FeatureToggle\Exception\Feature'
+        );
+        $coll = new Collection(array(1, 2, 3));
+    }
+
+    public function testConstructorValid()
+    {
+        $coll = new Collection(
+            array(
+                new Toggled('foo'),
+                new Toggled('bar')
+            )
+        );
+
+        $this->assertEquals(2, $coll->count());
+    }
+
     public function testOffsetSetException()
     {
         $this->setExpectedException(
