@@ -1,0 +1,2 @@
+<?php
+$featureToggleDefinition = array('feature.one' => array());

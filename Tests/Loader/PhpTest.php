@@ -59,11 +59,15 @@ class PhpTest extends \PHPUnit_Framework_TestCase
      *
      * @return void
      */
-    protected function prepareObject($empty = false)
+    protected function prepareObject($empty = false, $faulty = false)
     {
         if ($empty) {
             $this->fixture = new \SplFileObject(
                 __DIR__ . '/fixture/php.empty.fixture'
+            );
+        } else if ($faulty) {
+            $this->fixture = new \SplFileObject(
+                __DIR__ . '/fixture/php.faulty.fixture'
             );
         } else {
             $this->fixture = new \SplFileObject(
@@ -102,7 +106,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests the load method
      *
-     * @covers Masthowasli\Component\FeatureToggle\Loader\Php::load()
+     * @return void
      */
     public function testLoad()
     {
@@ -114,5 +118,19 @@ class PhpTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, count($this->object->load()));
         $this->prepareObject();
         $this->assertEquals(2, count($this->object->load()));
+    }
+    
+    /**
+     * Test for the load exception on parsing
+     *
+     * @return void
+     */
+    public function testParseExeception()
+    {
+        $this->prepareObject(false, true);
+        $this->setExpectedException(
+            'Masthowasli\Component\FeatureToggle\Exception\Loader'
+        );
+        $this->object->load();
     }
 }

@@ -63,6 +63,10 @@ class Php implements LoaderInterface
             $class = $definition['class'];
 
             $feature = new $class($name);
+            
+            $collection->append($feature);
         }
+        
+        return $collection;
     }
 }
