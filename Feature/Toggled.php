@@ -18,7 +18,8 @@
 
 namespace Masthowasli\Component\FeatureToggle\Feature;
 
-use \Masthowasli\Component\FeatureToggle\Feature\Base as Feature;
+use Masthowasli\Component\FeatureToggle\Feature\Base as Feature;
+use Masthowasli\Component\FeatureToggle\Feature\FeatureState;
 
 /**
  * On/off feature class
@@ -32,22 +33,33 @@ use \Masthowasli\Component\FeatureToggle\Feature\Base as Feature;
  */
 class Toggled extends Feature
 {
-    public function __construct($name, $state = self::FEATURE_DISABLED)
+    public function __construct($name, FeatureState $state = null)
     {
         parent::__construct($name);
+
+        if (null === $state) {
+            $state = new FeatureState(FeatureState::DISABLED);
+        }
         $this->state = $state;
     }
 
-    public function setState($state)
+    /**
+     * Whether this feature is enabled
+     *
+     * @return boolean Whether the feature is enabled
+     */
+    public function isEnabled()
     {
-        if (!is_integer($state)) {
-            throw new \InvalidArgumentException(
-                "The feature state has to be an integer constant value."
-            );
-        }
+        return $this->state->on();
+    }
 
-        $this->state = $state;
-
-        return $this;
+    /**
+     * Toggles the state of the feature
+     *
+     * @return void
+     */
+    public function toggle()
+    {
+        $this->state = $this->state->getComplementary();
     }
 }

@@ -42,7 +42,11 @@ class Timed extends Feature
 
         $now = new \DateTime();
         $this->state = $this->period->isWithin($now)
-            ? self::FEATURE_ENABLED
-            : self::FEATURE_DISABLED;
+            ? new FeatureState(FeatureState::ENABLED)
+            : new FeatureState(FeatureState::DISABLED);
+    }
+
+    public function isEnabled() {
+        return $this->state->on();
     }
 }

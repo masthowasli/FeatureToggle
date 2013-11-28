@@ -74,31 +74,23 @@ class ToggledTest extends \PHPUnit_Framework_TestCase
         );
         $stateProperty->setAccessible(true);
 
-        $this->assertEquals(
-            FeatureInterface::FEATURE_DISABLED,
+        $this->assertInstanceOf(
+            'Masthowasli\Component\FeatureToggle\Feature\FeatureState',
             $stateProperty->getValue($this->object)
         );
     }
 
-    public function testState()
+    public function testIsEnabled()
     {
-        $this->assertEquals(
-            FeatureInterface::FEATURE_DISABLED,
-            $this->object->getState()
-        );
-        $this->object->setState(FeatureInterface::FEATURE_ENABLED);
-        $this->assertEquals(
-            FeatureInterface::FEATURE_ENABLED,
-            $this->object->getState()
-        );
+        $this->assertFalse($this->object->isEnabled());
 
-    }
+        $this->object->toggle();
 
-    public function testInvalidSetState()
-    {
-        $this->setExpectedException('\InvalidArgumentException');
+        $this->assertTrue($this->object->isEnabled());
 
-        $this->object->setState('some invalid state');
+        $this->object->toggle();
+
+        $this->assertFalse($this->object->isEnabled());
     }
 
     public function testName()

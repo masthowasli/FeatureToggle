@@ -40,7 +40,10 @@ abstract class Base implements FeatureInterface
      */
     protected $name = '';
 
-    protected $state = self::FEATURE_DISABLED;
+    /**
+     * @var FeatureState
+     */
+    protected $state;
 
     /**
      * The feature's requirements
@@ -63,15 +66,5 @@ abstract class Base implements FeatureInterface
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Feature state getter
-     *
-     * @return integer The feature's state
-     */
-    public function getState()
-    {
-        return $this->state;
     }
 }

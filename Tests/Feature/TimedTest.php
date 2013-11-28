@@ -88,18 +88,15 @@ class TimedTest extends \PHPUnit_Framework_TestCase
         );
         $stateProperty->setAccessible(true);
 
-        $this->assertEquals(
-            FeatureInterface::FEATURE_ENABLED,
+        $this->assertInstanceOf(
+            'Masthowasli\Component\FeatureToggle\Feature\FeatureState',
             $stateProperty->getValue($this->object)
         );
     }
 
-    public function testState()
+    public function testIsEnabled()
     {
-        $this->assertEquals(
-            FeatureInterface::FEATURE_ENABLED,
-            $this->object->getState()
-        );
+        $this->assertTrue($this->object->isEnabled());
     }
 
     public function testName()

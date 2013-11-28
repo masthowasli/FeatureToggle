@@ -21,7 +21,7 @@ namespace Masthowasli\Component\FeatureToggle\Requirement;
 use Masthowasli\Component\FeatureToggle\Exception\Requirement as RequirementException;
 
 /**
- * Colleection class for feature requirements
+ * Collection class for feature requirements
  *
  * @category   Masthowasli
  * @package    FeatureToggle

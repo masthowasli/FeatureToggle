@@ -1,6 +1,6 @@
 <?php
 /**
- * FIle of the feature interface
+ * File of the feature interface
  *
  * PHP version 5.3
  *
@@ -21,22 +21,12 @@ namespace Masthowasli\Component\FeatureToggle\Feature;
  * @category   Masthowasli
  * @package    FeatureToggle
  * @subpackage Feature
- * @author     bytepark Gmbh <code@bytepark.de>
- * @license    http://www.bytepark.de proprietary
- * @link       http://www.bytepark.de
+ * @author     Thomas Sliwa <ts@unfinished.dyndns.org>
+ * @license    http://opensource.org/licenses/MIT MIT
+ * @link       https://github.com/masthowasli/FeatureToggle
  */
 interface FeatureInterface
 {
-    /*
-     * Disabled feature constant
-     */
-    const FEATURE_DISABLED = 0;
-
-    /*
-     * Enabled feature constant
-     */
-    const FEATURE_ENABLED  = 1;
-
     /**
      * Access to the feature's name
      *
@@ -45,9 +35,9 @@ interface FeatureInterface
     public function getName();
 
     /**
-     * Access to the feature's state
+     * Whether the feature is enabled
      *
-     * @return integer The feature's state
+     * @return boolean Whether the feature is enabled
      */
-    public function getState();
+    public function isEnabled();
 }
