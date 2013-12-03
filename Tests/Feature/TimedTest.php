@@ -94,9 +94,14 @@ class TimedTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testIsEnabled()
+    public function testOn()
     {
-        $this->assertTrue($this->object->isEnabled());
+        $this->assertTrue($this->object->on());
+    }
+
+    public function testOff()
+    {
+        $this->assertFalse($this->object->off());
     }
 
     public function testName()

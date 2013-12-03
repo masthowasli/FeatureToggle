@@ -44,13 +44,29 @@ class Toggled extends Feature
     }
 
     /**
-     * Whether this feature is enabled
+     * Whether this feature is on
      *
-     * @return boolean Whether the feature is enabled
+     * On means that the feature itself and all of the requirements
+     * meet the boolean value true
+     *
+     * @return boolean Whether the feature is on
      */
-    public function isEnabled()
+    public function on()
     {
         return $this->state->on();
+    }
+
+    /**
+     * Whether this feature is off
+     *
+     * Off means that the feature itself or one of the requirements
+     * meet the boolean value false
+     *
+     * @return boolean Whether the feature is off
+     */
+    public function off()
+    {
+        return $this->state->off();
     }
 
     /**

@@ -35,9 +35,22 @@ interface FeatureInterface
     public function getName();
 
     /**
-     * Whether the feature is enabled
+     * Whether the feature on
      *
-     * @return boolean Whether the feature is enabled
+     * On means the feature and all the requirements meet the
+     * combined state true
+     *
+     * @return boolean Whether the feature on
      */
-    public function isEnabled();
+    public function on();
+
+    /**
+     * Whether the feature off
+     *
+     * Off means the feature or on of the requirements meet the
+     * combined state false
+     *
+     * @return boolean Whether the feature off
+     */
+    public function off();
 }

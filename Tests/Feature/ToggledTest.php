@@ -80,17 +80,29 @@ class ToggledTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testIsEnabled()
+    public function testOn()
     {
-        $this->assertFalse($this->object->isEnabled());
+        $this->assertFalse($this->object->on());
 
         $this->object->toggle();
 
-        $this->assertTrue($this->object->isEnabled());
+        $this->assertTrue($this->object->on());
 
         $this->object->toggle();
 
-        $this->assertFalse($this->object->isEnabled());
+        $this->assertFalse($this->object->on());
+    }
+
+    public function testOff() {
+        $this->assertTrue($this->object->off());
+
+        $this->object->toggle();
+
+        $this->assertFalse($this->object->off());
+
+        $this->object->toggle();
+
+        $this->assertTrue($this->object->off());
     }
 
     public function testName()

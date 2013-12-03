@@ -46,7 +46,11 @@ class Timed extends Feature
             : new FeatureState(FeatureState::DISABLED);
     }
 
-    public function isEnabled() {
+    public function on() {
         return $this->state->on();
+    }
+
+    public function off() {
+        return $this->state->off();
     }
 }

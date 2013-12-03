@@ -55,26 +55,41 @@ class PhpTest extends \PHPUnit_Framework_TestCase
     /**
      * Prepares the Loader Object with the given feature
      *
-     * @param boolean $empty Whether to load the empty fixture
+     * @param \SplFileObject $fixtureFile The file to load as fixture
      *
      * @return void
      */
-    protected function prepareObject($empty = false, $faulty = false)
+    protected function prepareObject(\SplFileObject $fixtureFile)
     {
-        if ($empty) {
-            $this->fixture = new \SplFileObject(
-                __DIR__ . '/fixture/php.empty.fixture'
-            );
-        } else if ($faulty) {
-            $this->fixture = new \SplFileObject(
-                __DIR__ . '/fixture/php.faulty.fixture'
-            );
-        } else {
-            $this->fixture = new \SplFileObject(
-                __DIR__ . '/fixture/php.fixture'
-            );
-        }
-        $this->object = new Php($this->fixture);
+        $this->object = new Php($fixtureFile);
+    }
+
+    protected function getPassingFixture()
+    {
+        return new \SplFileObject(
+            __DIR__ . '/fixture/php.fixture'
+        );
+    }
+
+    protected function getEmptyFixture()
+    {
+        return new \SplFileObject(
+            __DIR__ . '/fixture/php.empty.fixture'
+        );
+    }
+
+    protected function getStructureFaultyFixture()
+    {
+        return new \SplFileObject(
+            __DIR__ . '/fixture/php.faulty.fixture'
+        );
+    }
+
+    protected function getCyclicFixture()
+    {
+        return new \SplFileObject(
+            __DIR__ . '/fixture/php.cyclic.fixture'
+        );
     }
 
     /**
@@ -84,7 +99,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructor()
     {
-        $this->prepareObject(true);
+        $this->prepareObject($this->getPassingFixture());
         $this->assertInstanceOf(
             '\Masthowasli\Component\FeatureToggle\Loader\Php',
             $this->object
@@ -110,27 +125,37 @@ class PhpTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoad()
     {
-        $this->prepareObject(true);
+        $this->prepareObject($this->getEmptyFixture());
         $this->assertInstanceOf(
             '\Masthowasli\Component\FeatureToggle\Feature\Collection',
             $this->object->load()
         );
         $this->assertEquals(0, count($this->object->load()));
-        $this->prepareObject();
+        $this->prepareObject($this->getPassingFixture());
         $this->assertEquals(2, count($this->object->load()));
     }
-    
+
     /**
-     * Test for the load exception on parsing
+     * Test for the load parsing exception
      *
      * @return void
      */
-    public function testParseExeception()
+    public function testLoadParseExeception()
     {
-        $this->prepareObject(false, true);
+        $this->prepareObject($this->getStructureFaultyFixture());
         $this->setExpectedException(
             'Masthowasli\Component\FeatureToggle\Exception\Loader'
         );
         $this->object->load();
+    }
+
+    /**
+     * Test for the requirement parsing exception
+     *
+     * @return void
+     */
+    public function testRequirementParseException()
+    {
+
     }
 }
