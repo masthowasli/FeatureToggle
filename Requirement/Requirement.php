@@ -52,14 +52,14 @@ class Requirement
     /**
      * Instantiates a new feature requirement
      *
-     * The required feature has to be given in the instanciation process. If no
+     * The required feature has to be given in the instantiation process. If no
      * required state is given, the call defaults to Requirement::FEATURE_ENABLED,
-     * whcih means the required feature has to be enabled so that the requirement
-     * is fullfilled.
+     * which means the required feature has to be enabled so that the requirement
+     * is full filled.
      *
      *
-     * @param Feature $feature       The feature to require
-     * @param integer $requiredState The required state of the feature
+     * @param FeatureInterface $feature       The feature to require
+     * @param integer          $requiredState The required state of the feature
      */
     public function __construct(
             FeatureInterface $feature,
