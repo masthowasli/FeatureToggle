@@ -43,7 +43,7 @@ class Collection extends \ArrayIterator
     public function __construct($array = array())
     {
         foreach ($array as $element) {
-            $this->testForFeatureInterfaceInstance($element);
+            $this->guardIsFeatureInterfaceInstance($element);
         }
 
         parent::__construct($array);
@@ -61,7 +61,7 @@ class Collection extends \ArrayIterator
      */
     public function offsetSet($offset, $newvalue)
     {
-        $this->testForFeatureInterfaceInstance($newvalue);
+        $this->guardIsFeatureInterfaceInstance($newvalue);
 
         parent::offsetSet($offset, $newvalue);
     }
@@ -77,12 +77,12 @@ class Collection extends \ArrayIterator
      */
     public function append($value)
     {
-        $this->testForFeatureInterfaceInstance($value);
+        $this->guardIsFeatureInterfaceInstance($value);
 
         parent::append($value);
     }
 
-    private function testForFeatureInterfaceInstance($value)
+    private function guardIsFeatureInterfaceInstance($value)
     {
         if (!$value instanceof FeatureInterface) {
             throw new FeatureException(
