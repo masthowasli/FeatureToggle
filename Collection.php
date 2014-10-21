@@ -41,7 +41,7 @@ class Collection implements \ArrayAccess, \IteratorAggregate
      */
     public function getIterator ()
     {
-        return new ArrayIterator($this->store);
+        return new \ArrayIterator($this->store);
     }
 
     /**
