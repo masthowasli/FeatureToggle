@@ -16,7 +16,7 @@
  * @link       https://github.com/masthowasli/FeatureToggle
  */
 
-namespace \Masthowasli\Component\FeatureToggle;
+namespace Masthowasli\Component\FeatureToggle;
 
 use Masthowasli\Component\FeatureToggle\Loader\LoaderInterface;
 
