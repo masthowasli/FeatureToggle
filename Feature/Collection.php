@@ -36,11 +36,9 @@ class Collection extends \ArrayIterator
      * Enforces the construction with an array consisting of FeatureInterface
      * implementations
      *
-     * @param FeatureInterface[] $array The array to construct with
-     *
-     * @return void
+     * @param array $array The array to construct with
      */
-    public function __construct($array = array())
+    public function __construct(array $array = array())
     {
         foreach ($array as $element) {
             $this->guardIsFeatureInterfaceInstance($element);
@@ -52,24 +50,24 @@ class Collection extends \ArrayIterator
     /**
      * Enforces the insertion of Requirement instances
      *
-     * @param string      $offset The offset to set
-     * @param Requirement $newval The value to set
+     * @param string      $offset   The offset to set
+     * @param Requirement $newValue The value to set
      *
      * @see \ArrayIterator::offsetSet()
      *
      * @return void
      */
-    public function offsetSet($offset, $newvalue)
+    public function offsetSet($offset, $newValue)
     {
-        $this->guardIsFeatureInterfaceInstance($newvalue);
+        $this->guardIsFeatureInterfaceInstance($newValue);
 
-        parent::offsetSet($offset, $newvalue);
+        parent::offsetSet($offset, $newValue);
     }
 
     /**
      * Enforces the insertion of Requirement instances
      *
-     * @param Requirement $value The value to append
+     * @param \Masthowasli\Component\FeatureToggle\Requirement\Requirement $value The value to append
      *
      * @see \ArrayIterator::append()
      *
