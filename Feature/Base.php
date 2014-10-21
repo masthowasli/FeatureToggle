@@ -18,7 +18,6 @@
 
 namespace Masthowasli\Component\FeatureToggle\Feature;
 
-use Masthowasli\Component\FeatureToggle\Feature\FeatureInterface;
 use Masthowasli\Component\FeatureToggle\Requirement\Collection as Requirements;
 
 /**
