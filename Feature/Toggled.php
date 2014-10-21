@@ -19,7 +19,6 @@
 namespace Masthowasli\Component\FeatureToggle\Feature;
 
 use Masthowasli\Component\FeatureToggle\Feature\Base as Feature;
-use Masthowasli\Component\FeatureToggle\Feature\FeatureState;
 
 /**
  * On/off feature class
