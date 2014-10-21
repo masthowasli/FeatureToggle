@@ -11,7 +11,7 @@
  * @package    FeatureToggle
  * @subpackage Manager
  * @author     Thomas Sliwa <ts@unfinished.dyndns.org>
- * @copyright  2012-2013 - Thomas Sliwa
+ * @copyright  2012-2014 - Thomas Sliwa
  * @license    http://opensource.org/licenses/MIT MIT
  * @link       https://github.com/masthowasli/FeatureToggle
  */
