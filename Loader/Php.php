@@ -8,7 +8,7 @@
  * @package    FeatureToggle
  * @subpackage Loader
  * @author     Thomas Sliwa <ts@unfinished.dyndns.org>
- * @copyright  2012-2014 - Thomas Sliwa
+ * @copyright  2012-2013 - Thomas Sliwa
  * @license    http://opensource.org/licenses/MIT MIT
  * @link       https://github.com/masthowasli/FeatureToggle
  */
@@ -46,27 +46,29 @@ class Php implements LoaderInterface
 
         if (!isset($featureToggleDefinition)) {
             return new Collection();
-        } else {
-            return $this->parse($featureToggleDefinition);
         }
+
+        return $this->parse($featureToggleDefinition);
     }
 
-    protected function parse(array $definitions)
+    private function parse(array $definitions)
     {
         $collection = new Collection();
 
         foreach ($definitions as $name => $definition) {
-            if (!array_key_exists('class', $definition)) {
-                throw new LoaderException();
-            }
-
-            $class = $definition['class'];
-
-            $feature = new $class($name);
-            
-            $collection->append($feature);
+            $collection->append($this->buildFeatureWhenClassIsDefined($name, $definition));
         }
-        
+
         return $collection;
+    }
+
+    private function buildFeatureWhenClassIsDefined($name, $definition)
+    {
+        if (!array_key_exists('class', $definition)) {
+            throw new LoaderException();
+        }
+
+        $class = $definition['class'];
+        return new $class($name);
     }
 }
