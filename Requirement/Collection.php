@@ -35,11 +35,9 @@ class Collection extends \ArrayIterator
     /**
      * Enforces the construction with an array consisting of Requirement instances
      *
-     * @param Requirement[] $array The array to construct with
-     *
-     * @return void
+     * @param array $array The array to construct with
      */
-    public function __construct($array = array())
+    public function __construct(array $array = array())
     {
         foreach ($array as $element) {
             $this->testForRequirementInstance($element);
