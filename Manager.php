@@ -39,7 +39,7 @@ class Manager
     /**
      * Instantiates the manager with the given loader
      *
-     * @param Loader $loader The loader to get the features from
+     * @param LoaderInterface $loader The loader to get the features from
      */
     public function __construct(LoaderInterface $loader)
     {
