@@ -7,8 +7,8 @@
  * @category   Masthowasli
  * @package    FeatureToggle
  * @subpackage Feature
- * @author     bytepark GmbH <code@bytepark.de>
- * @copyright  2012 - bytepark GmbH
+ * @author     Thomas Sliwa <ts@unfinished.dyndns.org>
+ * @copyright  2012-2014 - Thomas Sliwa
  * @license    http://www.bytepark.de proprietary
  * @link       http://www.bytepark.de
  */
