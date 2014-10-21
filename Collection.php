@@ -45,23 +45,22 @@ class Collection implements \ArrayAccess, \IteratorAggregate
     }
 
     /**
-     * @param offset
+     * @{inheritdoc}
      */
     public function offsetExists ($offset) {}
 
     /**
-     * @param offset
+     * @{inheritdoc}
      */
     public function offsetGet ($offset) {}
 
     /**
-     * @param offset
-     * @param value
+     * @{inheritdoc}
      */
     public function offsetSet ($offset, $value) {}
 
     /**
-     * @param offset
+     * @{inheritdoc}
      */
     public function offsetUnset ($offset) {}
 }
