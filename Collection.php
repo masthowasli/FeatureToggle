@@ -19,7 +19,7 @@
 namespace Masthowasli\Component\FeatureToggle;
 
 /**
- * Defines a collection of feature implentations
+ * Defines a collection of feature implementations
  *
  * @category   Masthowasli
  * @package    FeatureToggle
